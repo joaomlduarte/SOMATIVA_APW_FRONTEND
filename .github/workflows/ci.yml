@@ -5,6 +5,10 @@ on:
     branches: [master, dev]
   pull_request:
 
+# Permissão mínima: o token do workflow só pode ler o código
+permissions:
+  contents: read
+
 jobs:
   build-e-testes-e2e:
     runs-on: ubuntu-latest
