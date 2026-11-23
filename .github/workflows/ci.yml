@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [master, dev]
+  pull_request:
+
+jobs:
+  build-e-testes-e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Baixar o backend (API Django)
+        uses: actions/checkout@v4
+        with:
+          repository: joaomlduarte/SOMATIVA_APW_BACKEND
+          path: api
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Subir a API em segundo plano
+        working-directory: api
+        env:
+          SECRET_KEY: chave-usada-somente-no-ci
+          DEBUG: 'True'
+        run: |
+          pip install -r requirements.txt
+          python manage.py migrate
+          nohup python manage.py runserver 127.0.0.1:8000 > ../api.log 2>&1 &
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Build de produção
+        run: npm run build
+
+      - name: Instalar o navegador do Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: Testes end-to-end
+        run: npm run test:e2e
+
+      - name: Publicar o build como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: mangeflix-frontend-dist
+          path: dist

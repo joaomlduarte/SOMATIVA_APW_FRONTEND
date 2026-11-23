@@ -1,0 +1,429 @@
+/* Padrão visual do MangeFlix: mesmas cores, fontes e componentes em todas as telas */
+:root {
+  --cor-fundo: #0f0f13;
+  --cor-superficie: #1a1a21;
+  --cor-superficie-clara: #24242d;
+  --cor-borda: #2f2f3a;
+  --cor-texto: #f3f3f6;
+  --cor-texto-suave: #a8a8b5;
+  --cor-primaria: #e50914;
+  --cor-primaria-escura: #b80710;
+  --cor-sucesso: #22c55e;
+  --cor-erro: #ff5a5f;
+  --raio: 10px;
+  --sombra: 0 10px 30px rgba(0, 0, 0, 0.35);
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--cor-fundo);
+}
+
+a {
+  color: var(--cor-primaria);
+}
+
+h1,
+h3 {
+  margin: 0;
+}
+
+/* ---------- Logo ---------- */
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: var(--cor-texto);
+}
+
+.logo-destaque {
+  color: var(--cor-primaria);
+}
+
+/* ---------- Botões ---------- */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--raio);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.botao-primario {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+.botao-primario:hover:not(:disabled) {
+  background: var(--cor-primaria-escura);
+}
+
+.botao-secundario {
+  background: transparent;
+  border-color: var(--cor-borda);
+  color: var(--cor-texto);
+}
+
+.botao-secundario:hover {
+  border-color: var(--cor-texto-suave);
+}
+
+/* Botão de favorito: contorno quando NÃO favoritado, vermelho cheio quando favoritado */
+.botao-favorito {
+  width: 100%;
+  margin-top: auto;
+  background: transparent;
+  border-color: var(--cor-primaria);
+  color: var(--cor-texto);
+}
+
+.botao-favorito:hover:not(:disabled) {
+  background: rgba(229, 9, 20, 0.15);
+}
+
+.botao-favorito-ativo {
+  background: var(--cor-primaria);
+  color: #fff;
+}
+
+.botao-favorito-ativo:hover:not(:disabled) {
+  background: var(--cor-primaria-escura);
+}
+
+/* ---------- Mensagens ---------- */
+.alerta {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--raio);
+  border: 1px solid;
+  font-size: 0.95rem;
+}
+
+.alerta-sucesso {
+  background: rgba(34, 197, 94, 0.12);
+  border-color: var(--cor-sucesso);
+  color: #b7f5cd;
+}
+
+.alerta-erro {
+  background: rgba(255, 90, 95, 0.12);
+  border-color: var(--cor-erro);
+  color: #ffc9cb;
+}
+
+.aviso-flutuante {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  width: min(420px, calc(100% - 32px));
+  box-shadow: var(--sombra);
+  background: var(--cor-fundo);
+  border-radius: var(--raio);
+  z-index: 10;
+}
+
+/* ---------- Telas de login e cadastro ---------- */
+.pagina-autenticacao {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: radial-gradient(circle at top, #3a0a0e 0%, var(--cor-fundo) 60%);
+}
+
+.cartao-autenticacao {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 32px 28px;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  text-align: center;
+}
+
+.cartao-autenticacao h1 {
+  font-size: 1.4rem;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+}
+
+.campo input {
+  padding: 12px 14px;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie-clara);
+  color: var(--cor-texto);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.campo input:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+}
+
+.campo-erro {
+  color: var(--cor-erro);
+}
+
+.rodape-autenticacao {
+  margin: 0;
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+}
+
+/* ---------- Menu de navegação ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+  padding: 14px 32px;
+  background: rgba(15, 15, 19, 0.95);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.navbar-logo {
+  text-decoration: none;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 8px;
+}
+
+.navbar-links a {
+  padding: 8px 12px;
+  border-radius: var(--raio);
+  color: var(--cor-texto-suave);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.navbar-links a:hover {
+  color: var(--cor-texto);
+}
+
+.navbar-links a.router-link-active {
+  color: #fff;
+  background: var(--cor-superficie-clara);
+}
+
+.navbar-usuario {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navbar-ola {
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Catálogo e favoritos ---------- */
+.pagina {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px 32px 96px;
+}
+
+.pagina-titulo {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.filtro-generos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.chip {
+  padding: 8px 16px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 999px;
+  background: var(--cor-superficie);
+  color: var(--cor-texto-suave);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip-ativo {
+  background: var(--cor-primaria);
+  border-color: var(--cor-primaria);
+  color: #fff;
+}
+
+.grade-filmes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 22px;
+}
+
+.filme-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--cor-superficie);
+  border: 2px solid var(--cor-borda);
+  border-radius: 14px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.filme-card:hover {
+  transform: translateY(-3px);
+}
+
+.filme-card-favorito {
+  border-color: var(--cor-primaria);
+}
+
+.filme-poster {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  background: var(--cor-superficie-clara);
+}
+
+.filme-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.filme-selo {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--cor-primaria);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.filme-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+}
+
+.filme-titulo {
+  font-size: 1.05rem;
+}
+
+.filme-detalhes {
+  margin: 0;
+  color: var(--cor-primaria);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.filme-sinopse {
+  margin: 0 0 8px;
+  color: var(--cor-texto-suave);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.estado-vazio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 48px 16px;
+  color: var(--cor-texto-suave);
+  text-align: center;
+  font-size: 1.05rem;
+}
+
+.estado-vazio p {
+  margin: 0;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 12px 16px;
+  }
+
+  .navbar-links {
+    order: 3;
+    width: 100%;
+  }
+
+  .navbar-links a {
+    flex: 1;
+    text-align: center;
+  }
+
+  .navbar-ola {
+    display: none;
+  }
+
+  .pagina {
+    padding: 20px 16px 96px;
+  }
+
+  .pagina-titulo {
+    font-size: 1.5rem;
+  }
+
+  .grade-filmes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .filme-info {
+    padding: 10px;
+  }
+
+  .filme-sinopse {
+    font-size: 0.8rem;
+  }
+
+  .botao-favorito {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
