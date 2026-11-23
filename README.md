@@ -4,6 +4,8 @@ Interface web responsiva da plataforma **MangeFlix**, desenvolvida com **Vue.js 
 Ela consome a API REST em Django para cadastro, login, catálogo de filmes e favoritos.
 
 > Backend (Django REST Framework): https://github.com/joaomlduarte/SOMATIVA_APW_BACKEND
+>
+> **No ar (Railway):** https://frontend-production-dc1ee1f6.up.railway.app
 
 ## Tecnologias
 
@@ -78,6 +80,23 @@ O Playwright usa o Google Chrome instalado no computador e sobe o Vite sozinho. 
 - favoritos que continuam salvos depois do logout;
 - mensagem de erro para login inválido;
 - validação dos campos do cadastro.
+
+## Publicação no Railway
+
+O frontend é o serviço `frontend` do projeto `SOMATIVA_APW` no Railway (plano gratuito). Foi publicado a partir desta pasta com:
+
+```powershell
+railway up --service frontend
+```
+
+O Railpack roda `npm run build` e serve a pasta `dist/` com o Caddy, que manda todas as rotas para o `index.html`, como um SPA precisa.
+Variáveis do serviço `frontend`:
+
+| Variável | Valor |
+|---|---|
+| `VITE_API_URL` | `https://backend-production-a2814271.up.railway.app/api` |
+| `RAILPACK_SPA_OUTPUT_DIR` | `dist` |
+| `RAILPACK_NODE_VERSION` | `22` |
 
 ## CI/CD e branches
 
